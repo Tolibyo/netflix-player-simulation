@@ -3,5 +3,10 @@
     "name": "Good",
     "bandwidthKbps": 5000,
     "latencyMs": 50
+  },
+  {
+    "name": "Poor",
+    "bandwidthKbps": 1000,
+    "latencyMs": 200
   }
 ]
