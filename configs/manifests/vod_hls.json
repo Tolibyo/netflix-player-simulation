@@ -1,0 +1,38 @@
+{
+  "format": "HLS",
+  "renditions": [
+    {
+      "bitrateKbps": 800,
+      "segments": [
+        {"uri": "r800_s1.ts", "durationSec": 10},
+        {"uri": "r800_s2.ts", "durationSec": 10},
+        {"uri": "r800_s3.ts", "durationSec": 10},
+        {"uri": "r800_s4.ts", "durationSec": 10},
+        {"uri": "r800_s5.ts", "durationSec": 10},
+        {"uri": "r800_s6.ts", "durationSec": 10}
+      ]
+    },
+    {
+      "bitrateKbps": 2500,
+      "segments": [
+        {"uri": "r2500_s1.ts", "durationSec": 10},
+        {"uri": "r2500_s2.ts", "durationSec": 10},
+        {"uri": "r2500_s3.ts", "durationSec": 10},
+        {"uri": "r2500_s4.ts", "durationSec": 10},
+        {"uri": "r2500_s5.ts", "durationSec": 10},
+        {"uri": "r2500_s6.ts", "durationSec": 10}
+      ]
+    },
+    {
+      "bitrateKbps": 5000,
+      "segments": [
+        {"uri": "r5000_s1.ts", "durationSec": 10},
+        {"uri": "r5000_s2.ts", "durationSec": 10},
+        {"uri": "r5000_s3.ts", "durationSec": 10},
+        {"uri": "r5000_s4.ts", "durationSec": 10},
+        {"uri": "r5000_s5.ts", "durationSec": 10},
+        {"uri": "r5000_s6.ts", "durationSec": 10}
+      ]
+    }
+  ]
+}

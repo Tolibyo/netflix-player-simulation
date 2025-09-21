@@ -1,0 +1,38 @@
+{
+  "format": "DASH",
+  "representations": [
+    {
+      "bandwidthKbps": 800,
+      "parts": [
+        {"url": "r800_f1.m4s", "durSec": 10},
+        {"url": "r800_f2.m4s", "durSec": 10},
+        {"url": "r800_f3.m4s", "durSec": 10},
+        {"url": "r800_f4.m4s", "durSec": 10},
+        {"url": "r800_f5.m4s", "durSec": 10},
+        {"url": "r800_f6.m4s", "durSec": 10}
+      ]
+    },
+    {
+      "bandwidthKbps": 2500,
+      "parts": [
+        {"url": "r2500_f1.m4s", "durSec": 10},
+        {"url": "r2500_f2.m4s", "durSec": 10},
+        {"url": "r2500_f3.m4s", "durSec": 10},
+        {"url": "r2500_f4.m4s", "durSec": 10},
+        {"url": "r2500_f5.m4s", "durSec": 10},
+        {"url": "r2500_f6.m4s", "durSec": 10}
+      ]
+    },
+    {
+      "bandwidthKbps": 5000,
+      "parts": [
+        {"url": "r5000_f1.m4s", "durSec": 10},
+        {"url": "r5000_f2.m4s", "durSec": 10},
+        {"url": "r5000_f3.m4s", "durSec": 10},
+        {"url": "r5000_f4.m4s", "durSec": 10},
+        {"url": "r5000_f5.m4s", "durSec": 10},
+        {"url": "r5000_f6.m4s", "durSec": 10}
+      ]
+    }
+  ]
+}

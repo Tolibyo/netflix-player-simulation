@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Mid Browser",
+    "maxResolution": "1080p",
+    "maxBitrateKbps": 5000
+  },
+  {
+    "name": "TV 4K",
+    "maxResolution": "2160p",
+    "maxBitrateKbps": 25000
+  }
+]
