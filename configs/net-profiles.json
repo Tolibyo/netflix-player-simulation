@@ -1,0 +1,7 @@
+[
+  {
+    "name": "Good",
+    "bandwidthKbps": 5000,
+    "latencyMs": 50
+  }
+]
