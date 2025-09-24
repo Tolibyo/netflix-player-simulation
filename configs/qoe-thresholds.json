@@ -1,0 +1,7 @@
+{
+  "maxStartupMs": 1500,
+  "maxRebufferTimeMs": 2000,
+  "maxRebufferEvents": 1,
+  "minAvgBitrateKbps": 1200,
+  "maxQualitySwitches": 6
+}
