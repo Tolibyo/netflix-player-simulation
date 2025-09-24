@@ -1,7 +1,28 @@
 # Netflix Player Simulation Framework
 
+> **Disclaimer:** This project is **unofficial** and created to demonstrate **real-world streaming player logic and quality strategies** for domain-focused interviews. It is **not affiliated with Netflix** or any other streaming service.
+
+> **Status:** ~60% complete. Core modules implemented: ABR, buffering & rebuffer telemetry, QoE checks, HLS/DASH manifest parsing, and playback loop.
+
+> **Quick Start:**  
+> ```
+> pnpm install
+> pnpm test
+> ```
+> Runs the full Vitest test suite across all modules.
+
+---
+
 A TypeScript-based simulation of a streaming video player's core decision-making and playback behavior.  
 This project is designed as an interview-ready demonstration of how real-world video players (like Netflix) manage playback, adapt bitrate to network conditions, and measure Quality of Experience (QoE) — without using actual media files.
+
+---
+
+## Why This Matters for a Player/SDET Role
+
+- **ABR Stability:** Simulates how a real player adapts quality to fluctuating bandwidth and avoids oscillation.
+- **QoE Validation:** Asserts startup time, rebuffer limits, and bitrate floors against defined thresholds.
+- **Network Chaos Simulation:** Recreates how buffer and playback respond to changing conditions — a critical aspect of SDET work on streaming platforms.
 
 ---
 
@@ -101,3 +122,5 @@ Run the test suite:
 
 ```bash
 pnpm test
+
+
