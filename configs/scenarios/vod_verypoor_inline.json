@@ -1,0 +1,7 @@
+{
+  "name": "vod_verypoor_inline",
+  "manifestPath": "configs/manifests/vod_hls.json",
+  "deviceName": "Mid Browser",
+  "networkInline": { "name": "VeryPoor", "bandwidthKbps": 300, "latencyMs": 200 },
+  "thresholdsPath": "configs/qoe/very_poor.json"
+}
