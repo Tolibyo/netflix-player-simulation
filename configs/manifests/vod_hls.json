@@ -34,5 +34,8 @@
         {"uri": "r5000_s6.ts", "durationSec": 10}
       ]
     }
+  ],
+  "ads": [
+    { "atSec": 20, "durationSec": 20 }
   ]
 }

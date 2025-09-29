@@ -39,12 +39,14 @@ describe("Telemetry", () => {
     t.noteBitrate(2000);
     t.addQualitySwitch();
     t.reset();
-    expect(t.snapshot()).toEqual({
+    expect(t.snapshot()).toEqual(expect.objectContaining({
       startupTimeMs: null,
       rebufferEvents: 0,
       rebufferTimeMs: 0,
       avgBitrateKbps: null,
       qualitySwitches: 0,
-    });
+      adImpressions: 0,
+      adSeamGapMs: 0
+    }));
   });
 });

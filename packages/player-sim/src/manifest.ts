@@ -3,10 +3,12 @@ import path from 'path';
 
 export type Segment = { uri: string; durationSec: number };
 export type Rendition = { bitrateKbps: number; segments: Segment[] };
+export type AdMarker = { atSec: number; durationSec: number };
 
 export type ParsedManifest = {
   format: 'HLS' | 'DASH';
   renditions: Rendition[];
+  ads?: AdMarker[];
 };
 
 function readJson(p: string): any {
@@ -17,11 +19,11 @@ function readJson(p: string): any {
 
 export function parseManifest(p: string): ParsedManifest {
   const data = readJson(p);
+
   if (data.format !== 'HLS' && data.format !== 'DASH') {
     throw new Error('unknown manifest format');
   }
 
-  // HLS JSON shape: { format:'HLS', renditions:[{bitrateKbps, segments:[{uri,durationSec}]}] }
   if (data.format === 'HLS') {
     if (!Array.isArray(data.renditions)) throw new Error('HLS: renditions must be an array');
     for (const r of data.renditions) {
@@ -32,11 +34,24 @@ export function parseManifest(p: string): ParsedManifest {
         if (typeof s.durationSec !== 'number') throw new Error('HLS: segment durationSec missing');
       }
     }
-    return { format: 'HLS', renditions: data.renditions as Rendition[] };
+
+    // optional ads validation
+    let ads: AdMarker[] | undefined;
+    if (data.ads !== undefined) {
+      if (!Array.isArray(data.ads)) throw new Error('HLS: ads must be an array');
+      for (const a of data.ads) {
+        if (typeof a.atSec !== 'number') throw new Error('HLS: ad.atSec missing');
+        if (typeof a.durationSec !== 'number') throw new Error('HLS: ad.durationSec missing');
+      }
+      ads = data.ads as AdMarker[];
+    }
+
+    return { format: 'HLS', renditions: data.renditions as Rendition[], ads };
   }
 
-  // DASH JSON shape: { format:'DASH', representations:[{bandwidthKbps, parts:[{url, durSec}]}] }
+  // DASH shape: { format:'DASH', representations:[{bandwidthKbps, parts:[{url,durSec}]}], ads? }
   if (!Array.isArray(data.representations)) throw new Error('DASH: representations must be an array');
+
   const renditions: Rendition[] = data.representations.map((rep: any) => {
     if (typeof rep.bandwidthKbps !== 'number') throw new Error('DASH: bandwidthKbps missing');
     if (!Array.isArray(rep.parts)) throw new Error('DASH: parts must be an array');
@@ -48,5 +63,16 @@ export function parseManifest(p: string): ParsedManifest {
     return { bitrateKbps: rep.bandwidthKbps, segments };
   });
 
-  return { format: 'DASH', renditions };
+  // optional ads on DASH
+  let ads: AdMarker[] | undefined;
+  if (data.ads !== undefined) {
+    if (!Array.isArray(data.ads)) throw new Error('DASH: ads must be an array');
+    for (const a of data.ads) {
+      if (typeof a.atSec !== 'number') throw new Error('DASH: ad.atSec missing');
+      if (typeof a.durationSec !== 'number') throw new Error('DASH: ad.durationSec missing');
+    }
+    ads = data.ads as AdMarker[];
+  }
+
+  return { format: 'DASH', renditions, ads };
 }
