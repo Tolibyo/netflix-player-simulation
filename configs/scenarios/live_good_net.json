@@ -1,0 +1,8 @@
+{
+  "name": "live_good_net",
+  "manifestPath": "configs/manifests/vod_hls.json",
+  "deviceName": "Mid Browser",
+  "networkName": "Good",
+  "thresholdsPath": "configs/qoe/good.json",
+  "live": { "enabled": true, "startBehindSec": 20, "targetDriftSec": 12, "catchupRate": 1.25 }
+}
