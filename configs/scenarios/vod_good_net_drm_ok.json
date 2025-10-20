@@ -1,0 +1,12 @@
+{
+  "name": "vod_good_net_drm_ok",
+  "manifestPath": "configs/manifests/vod_hls.json",
+  "deviceName": "Mid Browser",
+  "networkName": "Good",
+  "thresholdsPath": "configs/qoe/good.json",
+  "drm": {
+    "required": true,
+    "allowDevices": ["Mid Browser", "TV 4K"],
+    "handshakeMs": 450
+  }
+}

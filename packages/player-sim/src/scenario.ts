@@ -7,6 +7,7 @@ import { Telemetry } from "./telemetry";
 import { SimpleABR } from "./abr";
 import { Playback } from "./playback";
 import { assertQoE, loadThresholds, type QoEThresholds } from "./assertions";
+import { performDrmHandshake, type DrmConfig } from "./drm";
 
 export type ScenarioConfig = {
   name: string;
@@ -15,6 +16,7 @@ export type ScenarioConfig = {
   networkName?: string;              // load by name from net-profiles.json
   networkInline?: NetProfile;        // alternatively, supply inline network
   thresholdsPath: string;            // QoE thresholds JSON
+  drm?: DrmConfig;                   // optional DRM behavior
 };
 
 export type ScenarioResult = {
@@ -61,8 +63,12 @@ export function runScenario(scPath: string): ScenarioResult {
   if (cappedRenditions.length === 0) throw new Error("Scenario: no renditions under device bitrate cap");
 
   const telemetry = new Telemetry();
+
+  // DRM happens before playback starts; may fail fast; adds to startupTime
+  performDrmHandshake(device.name, telemetry, sc.drm);
+
   const abr = new SimpleABR(cappedRenditions, { telemetry });
-  const pb = new Playback(cappedRenditions, net, telemetry, abr);
+  const pb = new Playback(cappedRenditions, net, telemetry, abr, { ads: manifest.ads });
 
   // Play until the rendition's segment list ends
   let ended = false;
