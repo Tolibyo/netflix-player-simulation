@@ -8,6 +8,7 @@ import { SimpleABR } from "./abr";
 import { Playback } from "./playback";
 import { assertQoE, loadThresholds, type QoEThresholds } from "./assertions";
 import { performDrmHandshake, type DrmConfig } from "./drm";
+import { writeJsonReport } from "./reporter/jsonReporter";
 
 export type ScenarioConfig = {
   name: string;
@@ -45,10 +46,11 @@ function resolveNetwork(sc: ScenarioConfig): NetProfile {
 }
 
 /**
- * Run the full VOD playback using Stage 7 loop:
+ * Run the full VOD playback:
+ * - DRM gate (optional) adds startup time or fails fast
  * - ABR starts conservative; each step fetches one segment
- * - buffer is updated and stalls recorded
- * - ABR update decides the next rendition
+ * - Buffer updates & rebuffer metrics
+ * - Optional JSON export behind EXPORT_JSON=1
  */
 export function runScenario(scPath: string): ScenarioResult {
   const sc = readJson<ScenarioConfig>(scPath);
@@ -79,7 +81,14 @@ export function runScenario(scPath: string): ScenarioResult {
 
   const snap = telemetry.snapshot();
   const qoe = assertQoE(snap, thresholds);
-  return { name: sc.name, ended, telemetry: snap, qoe };
+  const result: ScenarioResult = { name: sc.name, ended, telemetry: snap, qoe };
+
+  // Optional JSON export
+  if (process.env.EXPORT_JSON === "1") {
+    writeJsonReport(result);
+  }
+
+  return result;
 }
 
 /**

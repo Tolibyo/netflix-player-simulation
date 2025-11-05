@@ -1,0 +1,16 @@
+{
+  "scenario": "test_scenario",
+  "ended": true,
+  "telemetry": {
+    "startupTimeMs": 0,
+    "rebufferEvents": 0,
+    "rebufferTimeMs": 0,
+    "avgBitrateKbps": 1000,
+    "qualitySwitches": 1
+  },
+  "qoe": {
+    "overallPass": true,
+    "checks": []
+  },
+  "timestamp": "2025-11-05T04:50:49.142Z"
+}
