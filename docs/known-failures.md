@@ -1,8 +1,9 @@
-# Known Failing Tests (Expected Behavior)
+# QoE Scenarios with Expected Failures
 
-### `tests/scenario.test.ts > vod_verypoor_inline meets lenient thresholds`
+### `vod_verypoor_inline` scenario
 
-- **Reason:** The scenario simulates a *very poor* network condition that intentionally exceeds the `maxRebufferTimeMs` threshold.
-- **Expected Outcome:** `overallPass = false`
-- **Rationale:** This ensures the QoE assertion logic correctly fails when real-world playback conditions are too degraded, validating that the system detects performance issues rather than masking them.
-- **Next Step:** Keep this as-is unless lenient thresholds are redefined or dynamic tolerance logic is introduced.
+- **What it does:** Simulates a *very poor* network condition that intentionally exceeds the `maxRebufferTimeMs` threshold.
+- **Expected Outcome:** `overallPass = false` and the `rebufferTimeMs` QoE check fails.
+- **Why this matters:** This confirms the QoE gate correctly rejects severely degraded playback rather than silently passing it.
+- **How it’s enforced:** `tests/scenario.test.ts` contains a dedicated test
+  (`"vod_verypoor_inline fails QoE as expected under very poor network"`) that asserts this behavior.
